@@ -1,3 +1,4 @@
+import 'package:chatest/pages/message_page.dart';
 import 'package:flutter/material.dart';
 
 class DashPage extends StatelessWidget {
@@ -9,11 +10,16 @@ class DashPage extends StatelessWidget {
       appBar: AppBar(),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return const ListTile(
-            title: Text("data"),
-            subtitle: Text("sssss"),
-            leading: CircleAvatar(),
-            trailing: Icon(Icons.message),
+          return ListTile(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const MessagePage();
+              }));
+            },
+            title: const Text("data"),
+            subtitle: const Text("sssss"),
+            leading: const CircleAvatar(),
+            trailing: const Icon(Icons.message),
           );
         },
       ),
