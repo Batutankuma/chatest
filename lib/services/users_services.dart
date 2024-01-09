@@ -25,4 +25,18 @@ class UserService {
       return "Veuillez verifiez votre Mot de Passe ou Email est incorrect!";
     }
   }
+
+  //ecrire un message
+  static Future<String> message(String destinateur, String message) async {
+    try {
+      await supabase.from('message').insert({
+        "message": message,
+        "send": supabase.auth.currentUser!.id,
+        "recev": destinateur
+      });
+      return "message";
+    } catch (e) {
+      return "$e";
+    }
+  }
 }

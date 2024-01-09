@@ -22,3 +22,28 @@ class CompteModel {
     return data.map<CompteModel>((e) => CompteModel.from(e)).toList();
   }
 }
+
+class MessagModel {
+  final int id;
+  final String send;
+  final String recev;
+  final String message;
+
+  MessagModel(
+      {required this.id,
+      required this.send,
+      required this.recev,
+      required this.message});
+
+  factory MessagModel.from(data) {
+    return MessagModel(
+        id: data['id'],
+        message: data['message'],
+        recev: data['recev'],
+        send: data['send']);
+  }
+
+  static List<MessagModel> listmessage(data) {
+    return data.map<MessagModel>((e) => MessagModel.from(e)).toList();
+  }
+}

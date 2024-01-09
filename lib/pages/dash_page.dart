@@ -25,7 +25,7 @@ class DashPage extends StatelessWidget {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return const MessagePage();
+                      return MessagePage(compteModel: listitem[index]);
                     }));
                   },
                   title: Text(listitem[index].name),
