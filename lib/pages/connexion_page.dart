@@ -1,3 +1,4 @@
+import 'package:chatest/config.dart';
 import 'package:flutter/material.dart';
 
 class ConnexionPage extends StatelessWidget {
@@ -17,9 +18,11 @@ class ConnexionPage extends StatelessWidget {
           padding: const EdgeInsets.all(250),
           children: [
             TextFormField(
+              controller: email,
               decoration: const InputDecoration(hintText: "Email"),
             ),
             TextFormField(
+              controller: password,
               decoration: const InputDecoration(hintText: "Password"),
             ),
             const SizedBox(height: 10),
@@ -27,7 +30,23 @@ class ConnexionPage extends StatelessWidget {
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.black),
               ),
-              onPressed: () => Navigator.pushNamed(context, '/dash'),
+              onPressed: () {
+                supabase.auth
+                    .signInWithPassword(
+                        password: password.text, email: email.text)
+                    .then((value) {
+                  Navigator.pushNamed(context, '/dash');
+                }).catchError(
+                  // ignore: invalid_return_type_for_catch_error
+                  (error) => {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(error.toString()),
+                      ),
+                    )
+                  },
+                );
+              },
               child: const Center(
                 child: Text("Connexion", style: TextStyle(color: Colors.white)),
               ),
