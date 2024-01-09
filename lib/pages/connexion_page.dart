@@ -29,14 +29,16 @@ class ConnexionPage extends StatelessWidget {
               ),
               onPressed: null,
               child: Center(
-                child: Text("Connexion"),
+                child: Text("Connexion", style: TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 10),
             const ElevatedButton(
               onPressed: null,
               child: Center(
-                child: Text("Inscription"),
+                child: Text(
+                  "Inscription",
+                ),
               ),
             ),
           ],
