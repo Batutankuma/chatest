@@ -1,31 +1,24 @@
-class UserModel {
+class CompteModel {
+  final String uid;
   final String name;
   final String email;
-  final String password;
+  final String created_at;
 
-  UserModel({required this.name, required this.email, required this.password});
+  CompteModel(
+      {required this.uid,
+      required this.name,
+      required this.email,
+      required this.created_at});
+
+  factory CompteModel.from(data) {
+    return CompteModel(
+        uid: data['id'],
+        name: data['name'],
+        email: data['email'],
+        created_at: data['created_at']);
+  }
+
+  static List<CompteModel> listcompte(data) {
+    return data.map<CompteModel>((e) => CompteModel.from(e)).toList();
+  }
 }
-
-class MessageModel {
-  final String message;
-  final UserModel userA;
-  final UserModel userB;
-  final DateTime dateTime;
-
-  MessageModel(
-      {required this.message,
-      required this.userA,
-      required this.userB,
-      required this.dateTime});
-}
-
-UserModel userModelA = UserModel(
-    name: "Batuta", email: 'Saelbatita@gmail.com', password: "azerty");
-UserModel userModelB =
-    UserModel(name: "Nkuma", email: 'nkuma@outlook.com', password: "azerty");
-
-MessageModel messageModel = MessageModel(
-    message: "Hello World",
-    userA: userModelA,
-    userB: userModelB,
-    dateTime: DateTime.now());

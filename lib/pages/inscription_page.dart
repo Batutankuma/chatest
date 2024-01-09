@@ -1,4 +1,4 @@
-import 'package:chatest/config.dart';
+import 'package:chatest/services/users_services.dart';
 import 'package:flutter/material.dart';
 
 class InscriptionPage extends StatelessWidget {
@@ -35,10 +35,8 @@ class InscriptionPage extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                supabase.auth.signUp(
-                    password: password.text,
-                    email: email.text,
-                    data: {"name": name.text}).then((value) {
+                UserService.signUp(password.text, email.text, name.text)
+                    .then((value) {
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(value.toString()),
