@@ -16,7 +16,7 @@ class InscriptionPage extends StatelessWidget {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: const EdgeInsets.all(250),
+          padding: const EdgeInsets.all(50),
           children: [
             const Text("Inscription"),
             const SizedBox(height: 10),

@@ -15,7 +15,7 @@ class ConnexionPage extends StatelessWidget {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: const EdgeInsets.all(250),
+          padding: const EdgeInsets.all(50),
           children: [
             TextFormField(
               controller: email,

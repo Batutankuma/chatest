@@ -25,12 +25,9 @@ class MessagePage extends StatelessWidget {
                 if (snapshot.hasData) {
                   List<MessagModel> messages =
                       MessagModel.listmessage(snapshot.data);
-
                   return ListView.builder(
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
-                      print(messages[index].send);
-                      print(messages[index].recev);
                       if (messages[index].recev == compteModel.uid &&
                           messages[index].send ==
                               supabase.auth.currentUser?.id) {
@@ -49,7 +46,7 @@ class MessagePage extends StatelessWidget {
                     },
                   );
                 } else {
-                  return Text("Loading ...");
+                  return const Text("Loading ...");
                 }
               },
             ),
@@ -71,13 +68,15 @@ class MessagePage extends StatelessWidget {
                           UserService.message(compteModel.uid, messageCtr.text)
                               .then((value) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Message envoyer")));
+                                const SnackBar(
+                                    content: Text("Message envoyer")));
                           }).catchError((error) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Une erreur d'envoie")));
+                                const SnackBar(
+                                    content: Text("Une erreur d'envoie")));
                           });
                         },
-                        icon: Icon(Icons.message)))
+                        icon: const Icon(Icons.message)))
               ],
             ),
           )
@@ -93,69 +92,5 @@ class MessagePage extends StatelessWidget {
         child: Center(child: Text(compteModel.email[0])),
       ),
     );
-    if (messages.recev == compteModel.uid &&
-        messages.send == supabase.auth.currentUser?.id) {
-      return Align(
-        alignment: Alignment.centerRight,
-        child: ListTile(
-          title: Text(messages.message),
-          leading: CircleAvatar(
-            child: Center(child: Text(compteModel.email[0])),
-          ),
-        ),
-      );
-    } else if (messages.recev == supabase.auth.currentUser?.id &&
-        messages.send == compteModel.uid) {
-      return ListTile(
-        title: Text(messages.message),
-        leading: CircleAvatar(
-          child: Center(child: Text(supabase.auth.currentUser!.email![0])),
-        ),
-      );
-    }
-    return const Text("");
   }
 }
-
-/**
- * return SizedBox(
-      child: supabase.auth.currentUser?.id != user
-          ? Align(
-              alignment: Alignment.centerLeft,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    child: Center(
-                      child: Text(supabase.auth.currentUser!.email![0]),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.amber,
-                    child: Text(message),
-                  )
-                ],
-              ),
-            )
-          : Align(
-              alignment: Alignment.centerRight,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    child: Center(
-                      child: Text(supabase.auth.currentUser!.email![0]),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.green,
-                    child: Text(message),
-                  )
-                ],
-              ),
-            ),
-    );
- */
-
-/**return Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text("H"),
-                      );*/
